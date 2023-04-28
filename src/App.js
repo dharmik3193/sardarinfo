@@ -103,8 +103,8 @@ function App() {
               <span className="fixed-text">We Are </span>
               <span className="animate-text ah-words-wrapper">
                 <b className="is-visible"> Building...</b>
-                <b> Construction...</b>
-                <b> Kitchen Cabinate...</b>
+                <b> Thinking...</b>
+                <b> Creating...</b>
               </span>
             </div>
           </div>
