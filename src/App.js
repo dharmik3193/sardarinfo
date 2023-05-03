@@ -1,6 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
 import { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -9,7 +10,6 @@ function App() {
   const [minutes, setMinutes] = useState(0);
   const [seconds, setSeconds] = useState(0);
   const [email, setEmail] = useState('');
-  const [alert, setAlert] = useState('')
 
   let x = setInterval(function () {
 
@@ -42,20 +42,21 @@ function App() {
   }, 1000)
 
   const formhandler = (e) => {
-    setEmail(e.target.value)
-    if (e.target.value === '') {
-      setAlert("* This is required field")
-    } else if (!/^\S+@\S+\.\S+$/.test(e.target.value)) {
-      setAlert("Email Must Contain @ and .")
+    e.preventDefault();
+    if (email === '') {
+      toast.error("* Email is required field", {
+        position: toast.POSITION.TOP_CENTER
+      });
+    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+      toast.warn("Email Must Contain @ and .", {
+        position: toast.POSITION.TOP_CENTER
+      });
     } else {
-      setAlert("")
+      alert("Email is Valid")
     }
 
   }
 
-  const reset = () => {
-    setEmail("")
-  }
 
   var loadScript = function (src) {
     var tag = document.createElement('script');
@@ -75,6 +76,7 @@ function App() {
 
   return (
     <div id="wrapper" className="wrapper">
+      <ToastContainer />
       <div className="fxt-template-default fxt-template-layout5">
         {/* Background Element Area Start Here */}
         <ul className="fxt-bg-element">
@@ -147,9 +149,7 @@ function App() {
           <div className="fxt-subscribe-layout2 fxt-transformY-100 fxt-transition-delay-20">
             <div className="form-title">Let’s notify you when we are up</div>
             <form
-              action="http://affixtheme.com/html/flafy/flafy/vendor/php/subscribe.php"
               className="subscribe-form"
-              method="POST"
               data-pixsaas="newsletter-subscribe"
             >
               <div className="input-group stylish-input-group">
@@ -163,20 +163,20 @@ function App() {
                   id="newsletter-form-email"
                   placeholder="Enter your Email"
                   required=""
+                  value={email}
+                  onChange={(e)=>{setEmail(e.target.value)}}
                 />
                 <span className="input-group-addon">
                   <button
                     type="submit"
                     className="fxt-btn fxt-btn-fill fxt-btn-layout2"
+                    onClick={formhandler}
                   >
                     NOTIFY ME
                   </button>
                 </span>
               </div>
               <div className="clearfix" />
-              <div className="form-result alert">
-                <div className="content" />
-              </div>
             </form>
           </div>
         </div>
@@ -185,33 +185,28 @@ function App() {
         <div className="fxt-social fxt-social-layout5 fxt-absolute-box fxt-box-bottom-right">
           <ul className="fxt-social-items fxt-items-dark">
             <li className="fxt-facebook fxt-transformX-100 fxt-transition-delay-21">
-              <a href="#" title="Facebook">
+              <a href="https://www.facebook.com/people/Sardar-Info-Advertisement/100091876500390/" target='_blank' title="Facebook - Sardar Infotech">
                 <i className="fab fa-facebook-f" />
               </a>
             </li>
             <li className="fxt-twitter fxt-transformX-100 fxt-transition-delay-22">
-              <a href="#" title="twitter">
-                <i className="fab fa-twitter" />
-              </a>
-            </li>
-            <li className="fxt-google fxt-transformX-100 fxt-transition-delay-23">
-              <a href="#" title="google">
-                <i className="fab fa-google-plus-g" />
-              </a>
-            </li>
-            <li className="fxt-instagram fxt-transformX-100 fxt-transition-delay-24">
-              <a href="#" title="instagram">
+              <a href="https://www.instagram.com/sardar_info_/" target='_blank' title="Instagram - Sardar Infotech">
                 <i className="fab fa-instagram" />
               </a>
             </li>
-            <li className="fxt-linkedin fxt-transformX-100 fxt-transition-delay-25">
-              <a href="#" title="linkedin">
+            <li className="fxt-google fxt-transformX-100 fxt-transition-delay-23">
+            <a href="#" title="linkedin - Sardar Infotech">
                 <i className="fab fa-linkedin-in" />
               </a>
             </li>
-            <li className="fxt-youtube fxt-transformX-100 fxt-transition-delay-26">
-              <a href="#" title="youtube">
-                <i className="fab fa-youtube" />
+            <li className="fxt-instagram fxt-transformX-100 fxt-transition-delay-24">
+              <a href="mailto:sardarinfotech2002@gmail.com" target='_blank' title="Mail to Sardar Infotech">
+                <i className="	far fa-envelope-open" />
+              </a>
+            </li>
+            <li className="fxt-linkedin fxt-transformX-100 fxt-transition-delay-25">
+              <a href="https://wa.me/918866637763" target='_blank' title="Whatsapp - Sardar Infotech">
+                <i className="fab fa-whatsapp" />
               </a>
             </li>
           </ul>
